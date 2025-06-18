@@ -1,11 +1,13 @@
-from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel
-from typing import List
 import os
 import shutil
 import uuid
+from typing import List
+
+from fastapi import FastAPI, File, Form, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -22,6 +24,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 portfolio_db = {}  # Simulated in-memory DB
 
+
 class MediaItem(BaseModel):
     id: str
     filename: str
@@ -30,20 +33,39 @@ class MediaItem(BaseModel):
     description: str
     category: str
 
+
 class Portfolio(BaseModel):
     user_id: str
     items: List[MediaItem]
 
+
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
-    # FILL THIS IN
-    pass
+    file_ext = os.path.splitext(file.filename)[1]
+    unique_id = str(uuid.uuid4())
+    saved_filename = f"{unique_id}{file_ext}"
+    saved_path = os.path.join(UPLOAD_DIR, saved_filename)
+
+    with open(saved_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    media_type = "video" if "video" in file.content_type else "image"
+
+    return {
+        "id": unique_id,
+        "filename": saved_filename,
+        "media_type": media_type,
+        "url": f"/uploads/{saved_filename}",
+    }
+
 
 @app.post("/save-portfolio")
 async def save_portfolio(data: Portfolio):
     portfolio_db[data.user_id] = data.items
     return {"status": "success"}
 
+
 @app.get("/load-portfolio/{user_id}")
 async def load_portfolio(user_id: str):
     return {"items": portfolio_db.get(user_id, [])}
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
