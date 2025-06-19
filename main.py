@@ -4,7 +4,7 @@ import uuid
 from typing import List
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import Body, FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -91,6 +91,21 @@ async def load_portfolio(user_id: str):
         )
 
     return {"items": doc["items"]}
+
+
+@app.delete("/remove-media")
+async def remove_media(user_id: str = Body(...), media_id: str = Body(...)):
+    user_portfolio = await collection.find_one({"user_id": user_id})
+    if not user_portfolio:
+        return {"status": "error", "message": "User not found"}
+
+    updated_items = [item for item in user_portfolio["items"] if item["id"] != media_id]
+
+    await collection.update_one(
+        {"user_id": user_id}, {"$set": {"items": updated_items}}
+    )
+
+    return {"status": "success", "removed": media_id}
 
 
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")

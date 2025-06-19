@@ -6,6 +6,7 @@ import { usePortfolio } from "@/context/PortfolioContext";
 import { uploadFile, savePortfolio } from "@/services/api";
 import { MediaItem, Category } from "@/types";
 import { v4 as uuidv4 } from "uuid";
+import { useUser } from "@/context/UserContext";
 
 export default function UploadModal({ onClose }: { onClose: () => void }) {
   const { state, dispatch } = usePortfolio();
@@ -16,6 +17,8 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
   const [customCategory, setCustomCategory] = useState("");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+
+  const { userId } = useUser();
 
   const handleUpload = async () => {
     if (!file) return;
@@ -41,7 +44,7 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
       };
 
       dispatch({ type: "ADD_ITEM", payload: newItem });
-      await savePortfolio("", [...state.items, newItem]); // TODO: update userid
+      await savePortfolio(userId, [...state.items, newItem]);
       onClose();
     } catch (error) {
       console.error("Upload failed:", error);
