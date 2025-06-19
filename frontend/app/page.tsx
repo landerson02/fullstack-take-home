@@ -12,6 +12,25 @@ export default function HomePage() {
   const { state, dispatch } = usePortfolio();
   const [showModal, setShowModal] = useState(false);
 
+  // load portfolio items on initial render
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await loadPortfolio(USER_ID);
+        dispatch({ type: "LOAD_ITEMS", payload: res.items });
+      } catch (error) {
+        console.error("Error loading portfolio:", error);
+      }
+    })();
+  }, [dispatch]);
+
+  // auto-save portfolio whenever items change
+  useEffect(() => {
+    if (state.items.length > 0) {
+      savePortfolio(USER_ID, state.items).catch(console.error);
+    }
+  }, [state.items]);
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">

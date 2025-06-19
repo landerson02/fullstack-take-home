@@ -3,11 +3,21 @@ import shutil
 import uuid
 from typing import List
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
+from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
+
+load_dotenv()
+MONGO_URL = os.environ.get("MONGO_URL")
+BASE_URL = os.environ.get("BASE_URL")
+
+client = AsyncIOMotorClient(MONGO_URL)
+db = client["cashmere_take_home"]
+collection = db["portfolios"]
 
 app = FastAPI()
 
@@ -61,11 +71,26 @@ async def upload_file(file: UploadFile = File(...)):
 
 @app.post("/save-portfolio")
 async def save_portfolio(data: Portfolio):
-    portfolio_db[data.user_id] = data.items
+    await collection.update_one(
+        {"user_id": data.user_id},
+        {"$set": {"items": [item.dict() for item in data.items]}},
+        upsert=True,
+    )
     return {"status": "success"}
 
 
 @app.get("/load-portfolio/{user_id}")
 async def load_portfolio(user_id: str):
-    return {"items": portfolio_db.get(user_id, [])}
+    doc = await collection.find_one({"user_id": user_id})
+    if not doc:
+        return {"items": []}
+
+    for item in doc["items"]:
+        item["url"] = (
+            f"{BASE_URL}/uploads/{item['filename']}"  # BASE_URL should match your API domain
+        )
+
+    return {"items": doc["items"]}
+
+
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
