@@ -5,28 +5,28 @@ import { useEffect, useMemo } from "react";
 import Header from "@/components/Header";
 import PortfolioSection from "@/components/PortfolioSection";
 import { loadPortfolio, savePortfolio } from "@/services/api";
-
-const USER_ID = "a";
+import { useUser } from "@/context/UserContext";
 
 export default function HomePage() {
   const { state, dispatch } = usePortfolio();
+  const { userId } = useUser();
 
-  // load portfolio items on initial render
+  // load portfolio items on initial render or userId change
   useEffect(() => {
     (async () => {
       try {
-        const res = await loadPortfolio(USER_ID);
+        const res = await loadPortfolio(userId);
         dispatch({ type: "LOAD_ITEMS", payload: res.items });
       } catch (error) {
         console.error("Error loading portfolio:", error);
       }
     })();
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   // auto-save portfolio whenever items change
   useEffect(() => {
     if (state.items.length > 0) {
-      savePortfolio(USER_ID, state.items).catch(console.error);
+      savePortfolio(userId, state.items).catch(console.error);
     }
   }, [state.items]);
 
@@ -123,7 +123,7 @@ export default function HomePage() {
               </h2>
               <p className="text-[#6B5F5A] max-w-md mx-auto mb-6">
                 Start building your portfolio by uploading your first image or
-                video. Organize your work into categories to create a beautiful,
+                video. Organize your work into categories to create a
                 professional showcase.
               </p>
               <div className="flex items-center justify-center space-x-4 text-sm text-[#9A8F8A]">

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import UploadModal from "./UploadModal";
+import { useUser } from "@/context/UserContext";
 
 interface HeaderProps {
   title?: string;
@@ -9,6 +10,28 @@ interface HeaderProps {
 
 export default function Header({ title = "Portfolio Viewer" }: HeaderProps) {
   const [showModal, setShowModal] = useState(false);
+  const [isEditingUserId, setIsEditingUserId] = useState(false);
+  const [tempUserId, setTempUserId] = useState("");
+  const { userId, setUserId } = useUser();
+
+  const handleUserIdClick = () => {
+    setTempUserId(userId);
+    setIsEditingUserId(true);
+  };
+
+  const handleUserIdSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (tempUserId.trim()) {
+      setUserId(tempUserId.trim());
+    }
+    setIsEditingUserId(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setIsEditingUserId(false);
+    }
+  };
 
   return (
     <>
@@ -34,9 +57,44 @@ export default function Header({ title = "Portfolio Viewer" }: HeaderProps) {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-[#2D2A24]">{title}</h1>
-                <p className="text-sm text-[#6B5F5A]">
-                  Create and manage your creative portfolio
-                </p>
+                <div className="text-sm text-[#6B5F5A] flex items-center h-6">
+                  <span>Create and manage your creative portfolio</span>
+                  <span className="mx-3 select-none">•</span>
+                  {isEditingUserId ? (
+                    <form onSubmit={handleUserIdSubmit} className="inline-flex items-center">
+                      <input
+                        type="text"
+                        value={tempUserId}
+                        onChange={(e) => setTempUserId(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        onBlur={handleUserIdSubmit}
+                        autoFocus
+                        className="w-[180px] px-2 py-0.5 text-sm bg-white border border-[#E8D5C4] rounded-md focus:outline-none focus:border-[#D8B4A0] focus:ring-1 focus:ring-[#D8B4A0]"
+                        placeholder="Enter portfolio ID"
+                      />
+                    </form>
+                  ) : (
+                    <button
+                      onClick={handleUserIdClick}
+                      className="text-[#6B5F5A] hover:text-[#2D2A24] transition-colors inline-flex items-center space-x-1 min-w-[180px]"
+                    >
+                      <span>Portfolio: {userId}</span>
+                      <svg
+                        className="w-3.5 h-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 
