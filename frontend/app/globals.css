@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: Inter, sans-serif;
+
+  --color-primary: #E8D5C4;
+  --color-primary-hover: #D4C4B7;
+  --color-primary-dark: #C4B5A8;
+
+  --color-secondary: #F5F1EB;
+  --color-accent: #D8B4A0;
+  --color-accent-hover: #C4A08C;
+
+  --color-background: #FDFCFA;
+  --color-surface: #FAF8F5;
+  --color-border: #E8E0D8;
+
+  --color-text-primary: #2D2A24;
+  --color-text-secondary: #6B5F5A;
+  --color-text-muted: #9A8F8A;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+  }
+
+  body {
+    background-color: var(--color-background);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-[#E8D5C4] hover:bg-[#D4C4B7] text-[#2D2A24] font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-[#F5F1EB] hover:bg-[#E8E0D8] text-[#6B5F5A] font-medium rounded-lg transition-all duration-200 border border-[#E8E0D8];
+  }
+
+  .card {
+    @apply bg-[#FAF8F5] border border-[#E8E0D8] rounded-xl shadow-sm hover:shadow-md transition-all duration-200;
+  }
+}
+
