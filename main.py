@@ -3,10 +3,10 @@ import shutil
 import uuid
 from typing import List
 
+import uvicorn
 from dotenv import load_dotenv
-from fastapi import Body, FastAPI, File, Form, UploadFile
+from fastapi import Body, FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
@@ -23,7 +23,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://portfolio-manager-takehome.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -47,6 +47,16 @@ class MediaItem(BaseModel):
 class Portfolio(BaseModel):
     user_id: str
     items: List[MediaItem]
+
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "message": "backend is running"}
+
+
+if __name__ == "__main__":
+    port = 8000
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
 
 
 @app.post("/upload")

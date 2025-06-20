@@ -39,7 +39,7 @@ export default function PortfolioSection({
   };
 
   // map category options to emojis
-  const getCategoryIcon = (categoryName: String) => {
+  const getCategoryIcon = (categoryName: string) => {
     const cat = categoryName.toLowerCase();
 
     if (cat.includes("photo")) return "📷";
