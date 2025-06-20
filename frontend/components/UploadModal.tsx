@@ -132,6 +132,7 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
               </div>
               <button
                 onClick={onClose}
+                data-testid="close-modal"
                 className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
               >
                 <svg
@@ -199,10 +200,11 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                 {/* form fields */}
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-[#2D2A24] mb-2">
+                    <label htmlFor="title" className="block text-sm font-medium text-[#2D2A24] mb-2">
                       Title *
                     </label>
                     <input
+                      id="title"
                       type="text"
                       placeholder="Enter a descriptive title"
                       className="w-full px-4 py-3 border border-[#E8E0D8] rounded-lg bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#D8B4A0] focus:border-transparent transition-all placeholder-[#9A8F8A]"
@@ -212,10 +214,11 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#2D2A24] mb-2">
+                    <label htmlFor="description" className="block text-sm font-medium text-[#2D2A24] mb-2">
                       Description *
                     </label>
                     <textarea
+                      id="description"
                       placeholder="Describe your work..."
                       className="w-full px-4 py-3 border border-[#E8E0D8] rounded-lg bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#D8B4A0] focus:border-transparent transition-all placeholder-[#9A8F8A] resize-none"
                       value={description}
@@ -225,11 +228,12 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-[#2D2A24] mb-2">
+                    <label htmlFor="category" className="block text-sm font-medium text-[#2D2A24] mb-2">
                       Category *
                     </label>
                     <div className="relative">
                       <select
+                        id="category"
                         value={category}
                         onChange={handleCategoryChange}
                         className="w-full px-4 py-3 border border-[#E8E0D8] rounded-lg bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#D8B4A0] focus:border-transparent transition-all appearance-none cursor-pointer"
@@ -270,10 +274,11 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <label className="block text-sm font-medium text-[#2D2A24] mb-2">
+                        <label htmlFor="custom-category" className="block text-sm font-medium text-[#2D2A24] mb-2">
                           Custom Category *
                         </label>
                         <input
+                          id="custom-category"
                           type="text"
                           placeholder="Enter your custom category name"
                           className="w-full px-4 py-3 border border-[#E8E0D8] rounded-lg bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#D8B4A0] focus:border-transparent transition-all placeholder-[#9A8F8A]"

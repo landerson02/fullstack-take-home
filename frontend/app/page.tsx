@@ -57,7 +57,7 @@ export default function HomePage() {
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Portfolio Stats */}
         {totalItems > 0 && (
-          <div className="mb-8">
+          <div className="mb-8" data-testid="portfolio-overview">
             <div className="bg-gradient-to-r from-[#E8D5C4] to-[#D8B4A0] rounded-xl p-6 border border-[#E8E0D8]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">

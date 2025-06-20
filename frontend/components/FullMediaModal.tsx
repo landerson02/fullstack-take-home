@@ -94,6 +94,7 @@ export default function FullMediaModal({
                 <button
                   onClick={onClose}
                   className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
+                  data-testid="close-modal"
                 >
                   <svg
                     className="w-6 h-6 text-[#2D2A24]"
