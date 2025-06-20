@@ -76,11 +76,11 @@ export default function Header({ title = "Portfolio Viewer" }: HeaderProps) {
                   ) : (
                     <button
                       onClick={handleUserIdClick}
-                      className="text-[#6B5F5A] hover:text-[#2D2A24] transition-colors inline-flex items-center space-x-1 min-w-[180px]"
+                      className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-[#FAF8F5] hover:bg-[#F5F1EB] border border-[#E8E0D8] hover:border-[#D8B4A0] rounded-lg transition-all duration-200 text-[#6B5F5A] hover:text-[#2D2A24] min-w-[150px] group"
                     >
-                      <span>Portfolio: {userId}</span>
+                      <span className="text-sm font-medium">Portfolio: {userId}</span>
                       <svg
-                        className="w-3.5 h-3.5"
+                        className="w-3.5 h-3.5 text-[#9A8F8A] group-hover:text-[#6B5F5A] transition-colors"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

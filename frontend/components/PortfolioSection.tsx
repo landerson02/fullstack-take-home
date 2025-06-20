@@ -47,8 +47,6 @@ export default function PortfolioSection({
     if (cat.includes("design")) return "🎨";
     if (cat.includes("illustration")) return "✏️";
     if (cat.includes("digital art")) return "🖼️";
-    if (cat.includes("animation")) return "🎬";
-    if (cat.includes("architecture")) return "🏛️";
     if (cat.includes("fashion")) return "👗";
     if (cat.includes("fine art")) return "🎭";
 
@@ -67,9 +65,6 @@ export default function PortfolioSection({
 
     if (cat.includes("design") || cat.includes("fashion"))
       return "from-[#F5F1EB] to-[#E8D5C4]";
-
-    if (cat.includes("illustration") || cat.includes("animation"))
-      return "from-[#E8E0D8] to-[#D4C4B7]";
 
     return "from-[#F5F1EB] to-[#E8E0D8]";
   };

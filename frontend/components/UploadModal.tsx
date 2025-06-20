@@ -299,41 +299,43 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                 <label className="block text-sm font-medium text-[#2D2A24] mb-3">
                   Preview
                 </label>
-                <div className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-xl overflow-hidden min-h-[300px] flex items-center justify-center">
+                <div className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-xl overflow-hidden flex items-center justify-center">
                   {previewUrl ? (
-                    <div className="w-full h-full">
+                    <div className="w-full">
                       {file?.type.startsWith("image/") ? (
                         <img
                           src={previewUrl}
                           alt="Preview"
-                          className="w-full h-full object-cover"
+                          className="w-full h-auto max-h-[400px] object-contain"
                         />
                       ) : (
                         <video
                           src={previewUrl}
                           controls
-                          className="w-full h-full object-cover"
+                          className="w-full h-auto max-h-[400px] object-contain"
                         />
                       )}
                     </div>
                   ) : (
-                    <div className="text-center py-12">
-                      <svg
-                        className="w-16 h-16 text-[#E8E0D8] mx-auto mb-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                      <p className="text-[#9A8F8A] text-sm">
-                        Preview will appear here
-                      </p>
+                    <div className="text-center py-12 min-h-[300px] flex items-center justify-center">
+                      <div>
+                        <svg
+                          className="w-16 h-16 text-[#E8E0D8] mx-auto mb-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                        <p className="text-[#9A8F8A] text-sm">
+                          Preview will appear here
+                        </p>
+                      </div>
                     </div>
                   )}
                 </div>

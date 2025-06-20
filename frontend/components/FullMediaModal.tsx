@@ -168,10 +168,6 @@ export default function FullMediaModal({
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#E8D5C4] text-[#2D2A24]">
                         {item.category}
                       </span>
-                      <span className="text-xs text-[#9A8F8A]">
-                        {item.media_type === "image" ? "📷" : "🎥"}{" "}
-                        {item.media_type}
-                      </span>
                     </div>
                   </div>
 
