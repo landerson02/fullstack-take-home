@@ -11,7 +11,10 @@ export default function MediaCard({ item, onClick }: MediaCardProps) {
       className="group card overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer"
       onClick={onClick}
     >
-      <div className="aspect-video bg-[#FAF8F5] relative overflow-hidden">
+      <div
+        className="aspect-video relative overflow-hidden"
+        style={{ backgroundColor: "var(--color-surface)" }}
+      >
         {item.media_type === "image" ? (
           <img
             src={item.url}
@@ -22,7 +25,10 @@ export default function MediaCard({ item, onClick }: MediaCardProps) {
           <video src={item.url} className="w-full h-full object-cover" />
         )}
         <div className="absolute top-3 right-3">
-          <div className="bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium text-[#6B5F5A]">
+          <div
+            className="bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium"
+            style={{ color: "var(--color-text-secondary)" }}
+          >
             {item.media_type === "image" ? "📷" : "🎥"}
           </div>
         </div>
@@ -30,10 +36,11 @@ export default function MediaCard({ item, onClick }: MediaCardProps) {
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-full p-3">
             <svg
-              className="w-6 h-6 text-[#2D2A24]"
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              style={{ color: "var(--color-text-primary)" }}
             >
               <path
                 strokeLinecap="round"
@@ -46,14 +53,26 @@ export default function MediaCard({ item, onClick }: MediaCardProps) {
         </div>
       </div>
       <div className="p-5">
-        <h3 className="text-lg font-semibold text-[#2D2A24] mb-2 line-clamp-1">
+        <h3
+          className="text-lg font-semibold mb-2 line-clamp-1"
+          style={{ color: "var(--color-text-primary)" }}
+        >
           {item.title}
         </h3>
-        <p className="text-sm text-[#6B5F5A] line-clamp-2 mb-3 leading-relaxed">
+        <p
+          className="text-sm line-clamp-2 mb-3 leading-relaxed"
+          style={{ color: "var(--color-text-secondary)" }}
+        >
           {item.description}
         </p>
         <div className="flex items-center justify-between">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#E8D5C4] text-[#2D2A24]">
+          <span
+            className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
+            style={{
+              backgroundColor: "var(--color-primary)",
+              color: "var(--color-text-primary)",
+            }}
+          >
             {item.category}
           </span>
         </div>

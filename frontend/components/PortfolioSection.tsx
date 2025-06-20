@@ -53,20 +53,20 @@ export default function PortfolioSection({
     return "📁";
   };
 
-  // map category options to different gradient colors
-  const getCategoryColor = (categoryName: string) => {
+  // map category options to different gradient colors using CSS variables
+  const getCategoryGradient = (categoryName: string) => {
     const cat = categoryName.toLowerCase();
 
     if (cat.includes("photo") || cat.includes("fine art"))
-      return "from-[#E8D5C4] to-[#D8B4A0]";
+      return `linear-gradient(135deg, var(--color-accent-bg), var(--color-accent-bg-hover))`;
 
     if (cat.includes("video") || cat.includes("digital art"))
-      return "from-[#D8B4A0] to-[#C4A08C]";
+      return `linear-gradient(135deg, var(--color-accent-bg-hover), var(--color-accent))`;
 
     if (cat.includes("design") || cat.includes("fashion"))
-      return "from-[#F5F1EB] to-[#E8D5C4]";
+      return `linear-gradient(135deg, var(--color-secondary), var(--color-accent-bg))`;
 
-    return "from-[#F5F1EB] to-[#E8E0D8]";
+    return `linear-gradient(135deg, var(--color-secondary), var(--color-border))`;
   };
 
   return (
@@ -75,7 +75,11 @@ export default function PortfolioSection({
         {/* section header */}
         <motion.button
           onClick={handleToggle}
-          className={`w-full group relative overflow-hidden rounded-xl border border-[#E8E0D8] bg-gradient-to-r ${getCategoryColor(category)} p-6 text-left transition-all duration-300 hover:shadow-md`}
+          className="w-full group relative overflow-hidden rounded-xl border p-6 text-left transition-all duration-300 hover:shadow-md"
+          style={{
+            borderColor: "var(--color-border)",
+            background: getCategoryGradient(category),
+          }}
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
         >
@@ -85,8 +89,10 @@ export default function PortfolioSection({
                 {getCategoryIcon(category)}
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#2D2A24]">{category}</h2>
-                <p className="text-sm text-[#6B5F5A]">
+                <h2 className="text-xl font-bold" style={{ color: "#000000" }}>
+                  {category}
+                </h2>
+                <p className="text-sm" style={{ color: "#333333" }}>
                   {items.length} {items.length === 1 ? "item" : "items"}
                 </p>
               </div>
@@ -94,10 +100,13 @@ export default function PortfolioSection({
 
             <div className="flex items-center space-x-3">
               <div className="text-right">
-                <div className="text-sm font-medium text-[#2D2A24]">
+                <div
+                  className="text-sm font-medium"
+                  style={{ color: "#000000" }}
+                >
                   {items.length} {items.length === 1 ? "piece" : "pieces"}
                 </div>
-                <div className="text-xs text-[#6B5F5A]">
+                <div className="text-xs" style={{ color: "#333333" }}>
                   Click to {isOpen ? "collapse" : "expand"}
                 </div>
               </div>
@@ -107,10 +116,11 @@ export default function PortfolioSection({
                 className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center"
               >
                 <svg
-                  className="w-5 h-5 text-[#2D2A24]"
+                  className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  style={{ color: "#000000" }}
                 >
                   <path
                     strokeLinecap="round"

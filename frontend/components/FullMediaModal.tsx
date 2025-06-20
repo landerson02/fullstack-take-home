@@ -58,7 +58,11 @@ export default function FullMediaModal({
           onClick={onClose}
         >
           <motion.div
-            className="w-[95%] max-w-6xl bg-white rounded-2xl shadow-2xl border border-[#E8E0D8] overflow-hidden max-h-[90vh] flex flex-col"
+            className="w-[95%] max-w-6xl rounded-2xl shadow-2xl border overflow-hidden max-h-[90vh] flex flex-col"
+            style={{
+              borderColor: "var(--color-border)",
+              backgroundColor: "var(--color-background)",
+            }}
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -66,15 +70,21 @@ export default function FullMediaModal({
             onClick={(e) => e.stopPropagation()}
           >
             {/* header */}
-            <div className="bg-gradient-to-r from-[#E8D5C4] to-[#D8B4A0] px-8 py-6">
+            <div
+              className="px-8 py-6"
+              style={{
+                background: `linear-gradient(135deg, var(--color-primary), var(--color-accent))`,
+              }}
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                     <svg
-                      className="w-6 h-6 text-[#2D2A24]"
+                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      style={{ color: "var(--color-text-primary)" }}
                     >
                       <path
                         strokeLinecap="round"
@@ -85,10 +95,18 @@ export default function FullMediaModal({
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-[#2D2A24]">
+                    <h2
+                      className="text-2xl font-bold"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       {item.title}
                     </h2>
-                    <p className="text-[#6B5F5A] text-sm">Viewing full media</p>
+                    <p
+                      className="text-sm"
+                      style={{ color: "var(--color-text-secondary)" }}
+                    >
+                      Viewing full media
+                    </p>
                   </div>
                 </div>
                 <button
@@ -97,10 +115,11 @@ export default function FullMediaModal({
                   data-testid="close-modal"
                 >
                   <svg
-                    className="w-6 h-6 text-[#2D2A24]"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    style={{ color: "var(--color-text-primary)" }}
                   >
                     <path
                       strokeLinecap="round"
@@ -116,7 +135,10 @@ export default function FullMediaModal({
             {/* content */}
             <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
               {/* media */}
-              <div className="flex-1 bg-[#FAF8F5] flex items-center justify-center p-4 lg:p-6">
+              <div
+                className="flex-1 flex items-center justify-center p-4 lg:p-6"
+                style={{ backgroundColor: "var(--color-surface)" }}
+              >
                 <motion.div
                   className="w-full h-full flex items-center justify-center"
                   initial={{ scale: 0.9, opacity: 0 }}
@@ -152,7 +174,13 @@ export default function FullMediaModal({
               </div>
 
               {/* details */}
-              <div className="w-full lg:w-96 bg-white p-8 border-l border-[#E8E0D8] overflow-y-auto">
+              <div
+                className="w-full lg:w-96 p-8 border-l overflow-y-auto"
+                style={{
+                  backgroundColor: "var(--color-background)",
+                  borderColor: "var(--color-border)",
+                }}
+              >
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -161,11 +189,20 @@ export default function FullMediaModal({
                 >
                   {/* title */}
                   <div>
-                    <h3 className="text-2xl font-bold text-[#2D2A24] mb-2">
+                    <h3
+                      className="text-2xl font-bold mb-2"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       {item.title}
                     </h3>
                     <div className="flex items-center space-x-2">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#E8D5C4] text-[#2D2A24]">
+                      <span
+                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
+                        style={{
+                          backgroundColor: "var(--color-primary)",
+                          color: "var(--color-text-primary)",
+                        }}
+                      >
                         {item.category}
                       </span>
                     </div>
@@ -173,10 +210,16 @@ export default function FullMediaModal({
 
                   {/* desc */}
                   <div>
-                    <h4 className="text-sm font-semibold text-[#2D2A24] mb-3 uppercase tracking-wide">
+                    <h4
+                      className="text-sm font-semibold mb-3 uppercase tracking-wide"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       Description
                     </h4>
-                    <p className="text-[#6B5F5A] leading-relaxed">
+                    <p
+                      className="leading-relaxed"
+                      style={{ color: "var(--color-text-secondary)" }}
+                    >
                       {item.description}
                     </p>
                   </div>
@@ -184,25 +227,43 @@ export default function FullMediaModal({
                   {/* file info */}
                   <div className="space-y-4">
                     <div>
-                      <h4 className="text-sm font-semibold text-[#2D2A24] mb-3 uppercase tracking-wide">
+                      <h4
+                        className="text-sm font-semibold mb-3 uppercase tracking-wide"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
                         File Details
                       </h4>
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-[#9A8F8A]">Filename:</span>
-                          <span className="text-[#2D2A24] font-medium">
+                          <span style={{ color: "var(--color-text-muted)" }}>
+                            Filename:
+                          </span>
+                          <span
+                            className="font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             {item.filename}
                           </span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-[#9A8F8A]">Type:</span>
-                          <span className="text-[#2D2A24] font-medium capitalize">
+                          <span style={{ color: "var(--color-text-muted)" }}>
+                            Type:
+                          </span>
+                          <span
+                            className="font-medium capitalize"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             {item.media_type}
                           </span>
                         </div>
                         <div className="flex justify-between text-sm">
-                          <span className="text-[#9A8F8A]">Category:</span>
-                          <span className="text-[#2D2A24] font-medium">
+                          <span style={{ color: "var(--color-text-muted)" }}>
+                            Category:
+                          </span>
+                          <span
+                            className="font-medium"
+                            style={{ color: "var(--color-text-primary)" }}
+                          >
                             {item.category}
                           </span>
                         </div>
@@ -211,11 +272,26 @@ export default function FullMediaModal({
                   </div>
 
                   {/* actions */}
-                  <div className="pt-4 border-t border-[#E8E0D8]">
+                  <div
+                    className="pt-4 border-t"
+                    style={{ borderColor: "var(--color-border)" }}
+                  >
                     <div className="flex space-x-3">
                       <button
                         onClick={() => window.open(item.url, "_blank")}
-                        className="flex-1 px-4 py-2 bg-[#E8D5C4] hover:bg-[#D4C4B7] text-[#2D2A24] rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+                        className="flex-1 px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+                        style={{
+                          backgroundColor: "var(--color-primary)",
+                          color: "var(--color-text-primary)",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor =
+                            "var(--color-primary-hover)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor =
+                            "var(--color-primary)";
+                        }}
                       >
                         <svg
                           className="w-4 h-4"
@@ -236,7 +312,19 @@ export default function FullMediaModal({
                         onClick={() => {
                           navigator.clipboard.writeText(item.url);
                         }}
-                        className="px-4 py-2 bg-[#F5F1EB] hover:bg-[#E8E0D8] text-[#6B5F5A] rounded-lg font-medium transition-colors"
+                        className="px-4 py-2 rounded-lg font-medium transition-colors"
+                        style={{
+                          backgroundColor: "var(--color-secondary)",
+                          color: "var(--color-text-secondary)",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor =
+                            "var(--color-border)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor =
+                            "var(--color-secondary)";
+                        }}
                       >
                         <svg
                           className="w-4 h-4"
@@ -252,42 +340,48 @@ export default function FullMediaModal({
                           />
                         </svg>
                       </button>
-                      <button
-                        onClick={handleDelete}
-                        disabled={isDeleting}
-                        className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg font-medium transition-colors flex items-center justify-center"
-                      >
-                        {isDeleting ? (
-                          <svg
-                            className="w-4 h-4 animate-spin"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                            />
-                          </svg>
-                        ) : (
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            />
-                          </svg>
-                        )}
-                      </button>
                     </div>
+                    <button
+                      onClick={handleDelete}
+                      disabled={isDeleting}
+                      className="w-full mt-3 px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center"
+                      style={{
+                        backgroundColor: isDeleting
+                          ? "var(--color-border)"
+                          : "#ef4444",
+                        color: isDeleting ? "var(--color-text-muted)" : "white",
+                      }}
+                    >
+                      {isDeleting ? (
+                        <svg
+                          className="w-4 h-4 animate-spin"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                          />
+                        </svg>
+                      ) : (
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      )}
+                    </button>
                   </div>
                 </motion.div>
               </div>

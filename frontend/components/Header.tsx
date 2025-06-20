@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import UploadModal from "./UploadModal";
+import ThemeSelector from "./ThemeSelector";
 import { useUser } from "@/context/UserContext";
 
 interface HeaderProps {
@@ -35,17 +36,30 @@ export default function Header({ title = "Portfolio Viewer" }: HeaderProps) {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#E8E0D8] shadow-sm">
+      <header
+        className="sticky top-0 z-50 backdrop-blur-md border-b shadow-sm"
+        style={{
+          backgroundColor: "var(--color-background)",
+          borderColor: "var(--color-border)",
+          opacity: 0.95,
+        }}
+      >
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo and Title */}
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#E8D5C4] to-[#D8B4A0] rounded-lg flex items-center justify-center shadow-sm">
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center shadow-sm"
+                style={{
+                  background: `linear-gradient(135deg, var(--color-primary), var(--color-accent))`,
+                }}
+              >
                 <svg
-                  className="w-6 h-6 text-[#2D2A24]"
+                  className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  style={{ color: "var(--color-text-primary)" }}
                 >
                   <path
                     strokeLinecap="round"
@@ -56,12 +70,23 @@ export default function Header({ title = "Portfolio Viewer" }: HeaderProps) {
                 </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-[#2D2A24]">{title}</h1>
-                <div className="text-sm text-[#6B5F5A] flex items-center h-6">
+                <h1
+                  className="text-2xl font-bold"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
+                  {title}
+                </h1>
+                <div
+                  className="text-sm flex items-center h-6"
+                  style={{ color: "var(--color-text-secondary)" }}
+                >
                   <span>Create and manage your creative portfolio</span>
                   <span className="mx-3 select-none">•</span>
                   {isEditingUserId ? (
-                    <form onSubmit={handleUserIdSubmit} className="inline-flex items-center">
+                    <form
+                      onSubmit={handleUserIdSubmit}
+                      className="inline-flex items-center"
+                    >
                       <input
                         type="text"
                         value={tempUserId}
@@ -69,21 +94,50 @@ export default function Header({ title = "Portfolio Viewer" }: HeaderProps) {
                         onKeyDown={handleKeyDown}
                         onBlur={handleUserIdSubmit}
                         autoFocus
-                        className="w-[180px] px-2 py-0.5 text-sm bg-white border border-[#E8D5C4] rounded-md focus:outline-none focus:border-[#D8B4A0] focus:ring-1 focus:ring-[#D8B4A0]"
+                        className="w-[180px] px-2 py-0.5 text-sm border rounded-md focus:outline-none focus:ring-1"
+                        style={{
+                          borderColor: "var(--color-primary)",
+                          color: "var(--color-text-primary)",
+                          backgroundColor: "var(--color-surface)",
+                        }}
                         placeholder="Enter portfolio ID"
                       />
                     </form>
                   ) : (
                     <button
                       onClick={handleUserIdClick}
-                      className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-[#FAF8F5] hover:bg-[#F5F1EB] border border-[#E8E0D8] hover:border-[#D8B4A0] rounded-lg transition-all duration-200 text-[#6B5F5A] hover:text-[#2D2A24] min-w-[150px] group"
+                      className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg transition-all duration-200 min-w-[150px] group border"
+                      style={{
+                        backgroundColor: "var(--color-surface)",
+                        borderColor: "var(--color-border)",
+                        color: "var(--color-text-secondary)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--color-secondary)";
+                        e.currentTarget.style.borderColor =
+                          "var(--color-accent)";
+                        e.currentTarget.style.color =
+                          "var(--color-text-primary)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--color-surface)";
+                        e.currentTarget.style.borderColor =
+                          "var(--color-border)";
+                        e.currentTarget.style.color =
+                          "var(--color-text-secondary)";
+                      }}
                     >
-                      <span className="text-sm font-medium">Portfolio: {userId}</span>
+                      <span className="text-sm font-medium">
+                        Portfolio: {userId}
+                      </span>
                       <svg
-                        className="w-3.5 h-3.5 text-[#9A8F8A] group-hover:text-[#6B5F5A] transition-colors"
+                        className="w-3.5 h-3.5 transition-colors"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
+                        style={{ color: "var(--color-text-muted)" }}
                       >
                         <path
                           strokeLinecap="round"
@@ -98,26 +152,29 @@ export default function Header({ title = "Portfolio Viewer" }: HeaderProps) {
               </div>
             </div>
 
-            {/* Upload Button */}
-            <button
-              onClick={() => setShowModal(true)}
-              className="btn-primary flex items-center space-x-2"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            {/* Theme Selector and Upload Button */}
+            <div className="flex items-center space-x-3">
+              <ThemeSelector />
+              <button
+                onClick={() => setShowModal(true)}
+                className="btn-primary flex items-center space-x-2"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-              <span>Upload New</span>
-            </button>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+                <span>Upload New</span>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -126,4 +183,3 @@ export default function Header({ title = "Portfolio Viewer" }: HeaderProps) {
     </>
   );
 }
-

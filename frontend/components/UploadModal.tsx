@@ -99,19 +99,29 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3, ease: "easeOut" }}
-          className="w-[95%] max-w-2xl bg-white rounded-2xl shadow-2xl border border-[#E8E0D8] overflow-hidden"
+          className="w-[95%] max-w-2xl rounded-2xl shadow-2xl border overflow-hidden"
+          style={{
+            borderColor: "var(--color-border)",
+            backgroundColor: "var(--color-background)",
+          }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* header */}
-          <div className="bg-gradient-to-r from-[#E8D5C4] to-[#D8B4A0] px-8 py-6">
+          <div
+            className="px-8 py-6"
+            style={{
+              background: `linear-gradient(135deg, var(--color-primary), var(--color-accent))`,
+            }}
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
                   <svg
-                    className="w-6 h-6 text-[#2D2A24]"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    style={{ color: "var(--color-text-primary)" }}
                   >
                     <path
                       strokeLinecap="round"
@@ -122,10 +132,16 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                   </svg>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-[#2D2A24]">
+                  <h2
+                    className="text-2xl font-bold"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     Upload New Media
                   </h2>
-                  <p className="text-[#6B5F5A] text-sm">
+                  <p
+                    className="text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
                     Add a new piece to your portfolio
                   </p>
                 </div>
@@ -136,10 +152,11 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                 className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
               >
                 <svg
-                  className="w-5 h-5 text-[#2D2A24]"
+                  className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  style={{ color: "var(--color-text-primary)" }}
                 >
                   <path
                     strokeLinecap="round"
@@ -159,7 +176,10 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
               <div className="space-y-6">
                 {/* file upload */}
                 <div>
-                  <label className="block text-sm font-medium text-[#2D2A24] mb-3">
+                  <label
+                    className="block text-sm font-medium mb-3"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
                     Choose File
                   </label>
                   <div className="relative">
@@ -172,13 +192,30 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                     />
                     <label
                       htmlFor="file-upload"
-                      className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-[#E8E0D8] rounded-xl bg-[#FAF8F5] hover:bg-[#F5F1EB] hover:border-[#D8B4A0] transition-all cursor-pointer"
+                      className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl transition-all cursor-pointer"
+                      style={{
+                        borderColor: "var(--color-border)",
+                        backgroundColor: "var(--color-surface)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--color-secondary)";
+                        e.currentTarget.style.borderColor =
+                          "var(--color-accent)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--color-surface)";
+                        e.currentTarget.style.borderColor =
+                          "var(--color-border)";
+                      }}
                     >
                       <svg
-                        className="w-8 h-8 text-[#9A8F8A] mb-2"
+                        className="w-8 h-8 mb-2"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
+                        style={{ color: "var(--color-text-muted)" }}
                       >
                         <path
                           strokeLinecap="round"
@@ -187,10 +224,16 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                           d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                         />
                       </svg>
-                      <span className="text-sm text-[#6B5F5A]">
+                      <span
+                        className="text-sm"
+                        style={{ color: "var(--color-text-secondary)" }}
+                      >
                         {file ? file.name : "Click to select image or video"}
                       </span>
-                      <span className="text-xs text-[#9A8F8A] mt-1">
+                      <span
+                        className="text-xs mt-1"
+                        style={{ color: "var(--color-text-muted)" }}
+                      >
                         Supports: JPG, PNG, GIF, WEBP, MP4, MOV
                       </span>
                     </label>
@@ -200,27 +243,45 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                 {/* form fields */}
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="title" className="block text-sm font-medium text-[#2D2A24] mb-2">
+                    <label
+                      htmlFor="title"
+                      className="block text-sm font-medium mb-2"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       Title *
                     </label>
                     <input
                       id="title"
                       type="text"
                       placeholder="Enter a descriptive title"
-                      className="w-full px-4 py-3 border border-[#E8E0D8] rounded-lg bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#D8B4A0] focus:border-transparent transition-all placeholder-[#9A8F8A]"
+                      className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                      style={{
+                        borderColor: "var(--color-border)",
+                        backgroundColor: "var(--color-surface)",
+                        color: "var(--color-text-primary)",
+                      }}
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="description" className="block text-sm font-medium text-[#2D2A24] mb-2">
+                    <label
+                      htmlFor="description"
+                      className="block text-sm font-medium mb-2"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       Description *
                     </label>
                     <textarea
                       id="description"
                       placeholder="Describe your work..."
-                      className="w-full px-4 py-3 border border-[#E8E0D8] rounded-lg bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#D8B4A0] focus:border-transparent transition-all placeholder-[#9A8F8A] resize-none"
+                      className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all resize-none"
+                      style={{
+                        borderColor: "var(--color-border)",
+                        backgroundColor: "var(--color-surface)",
+                        color: "var(--color-text-primary)",
+                      }}
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
                       rows={3}
@@ -228,7 +289,11 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                   </div>
 
                   <div>
-                    <label htmlFor="category" className="block text-sm font-medium text-[#2D2A24] mb-2">
+                    <label
+                      htmlFor="category"
+                      className="block text-sm font-medium mb-2"
+                      style={{ color: "var(--color-text-primary)" }}
+                    >
                       Category *
                     </label>
                     <div className="relative">
@@ -236,7 +301,12 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                         id="category"
                         value={category}
                         onChange={handleCategoryChange}
-                        className="w-full px-4 py-3 border border-[#E8E0D8] rounded-lg bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#D8B4A0] focus:border-transparent transition-all appearance-none cursor-pointer"
+                        className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all appearance-none cursor-pointer"
+                        style={{
+                          borderColor: "var(--color-border)",
+                          backgroundColor: "var(--color-surface)",
+                          color: "var(--color-text-primary)",
+                        }}
                       >
                         <option value="" disabled>
                           Select a category
@@ -249,10 +319,11 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                       </select>
                       <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
                         <svg
-                          className="w-5 h-5 text-[#9A8F8A]"
+                          className="w-5 h-5"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
+                          style={{ color: "var(--color-text-muted)" }}
                         >
                           <path
                             strokeLinecap="round"
@@ -274,18 +345,30 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <label htmlFor="custom-category" className="block text-sm font-medium text-[#2D2A24] mb-2">
+                        <label
+                          htmlFor="custom-category"
+                          className="block text-sm font-medium mb-2"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
                           Custom Category *
                         </label>
                         <input
                           id="custom-category"
                           type="text"
                           placeholder="Enter your custom category name"
-                          className="w-full px-4 py-3 border border-[#E8E0D8] rounded-lg bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#D8B4A0] focus:border-transparent transition-all placeholder-[#9A8F8A]"
+                          className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                          style={{
+                            borderColor: "var(--color-border)",
+                            backgroundColor: "var(--color-surface)",
+                            color: "var(--color-text-primary)",
+                          }}
                           value={customCategory}
                           onChange={(e) => setCustomCategory(e.target.value)}
                         />
-                        <p className="text-xs text-[#9A8F8A] mt-1">
+                        <p
+                          className="text-xs mt-1"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
                           Create a custom category for your work
                         </p>
                       </motion.div>
@@ -296,10 +379,19 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
 
               {/* right column - preview */}
               <div>
-                <label className="block text-sm font-medium text-[#2D2A24] mb-3">
+                <label
+                  className="block text-sm font-medium mb-3"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
                   Preview
                 </label>
-                <div className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-xl overflow-hidden flex items-center justify-center">
+                <div
+                  className="border rounded-xl overflow-hidden flex items-center justify-center"
+                  style={{
+                    backgroundColor: "var(--color-surface)",
+                    borderColor: "var(--color-border)",
+                  }}
+                >
                   {previewUrl ? (
                     <div className="w-full">
                       {file?.type.startsWith("image/") ? (
@@ -320,10 +412,11 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                     <div className="text-center py-12 min-h-[300px] flex items-center justify-center">
                       <div>
                         <svg
-                          className="w-16 h-16 text-[#E8E0D8] mx-auto mb-4"
+                          className="w-16 h-16 mx-auto mb-4"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
+                          style={{ color: "var(--color-border)" }}
                         >
                           <path
                             strokeLinecap="round"
@@ -332,7 +425,10 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                           />
                         </svg>
-                        <p className="text-[#9A8F8A] text-sm">
+                        <p
+                          className="text-sm"
+                          style={{ color: "var(--color-text-muted)" }}
+                        >
                           Preview will appear here
                         </p>
                       </div>
@@ -343,10 +439,21 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
             </div>
 
             {/* cancel / upload */}
-            <div className="flex justify-end gap-3 pt-8 border-t border-[#E8E0D8] mt-8">
+            <div
+              className="flex justify-end gap-3 pt-8 border-t mt-8"
+              style={{ borderColor: "var(--color-border)" }}
+            >
               <button
                 onClick={onClose}
-                className="px-6 py-3 text-[#6B5F5A] hover:bg-[#F5F1EB] rounded-lg transition-colors font-medium"
+                className="px-6 py-3 rounded-lg transition-colors font-medium"
+                style={{ color: "var(--color-text-secondary)" }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "var(--color-secondary)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                }}
               >
                 Cancel
               </button>
@@ -355,9 +462,31 @@ export default function UploadModal({ onClose }: { onClose: () => void }) {
                 disabled={!isFormValid || isUploading}
                 className={`px-6 py-3 rounded-lg font-medium transition-all ${
                   !isFormValid || isUploading
-                    ? "bg-[#E8E0D8] text-[#9A8F8A] cursor-not-allowed"
-                    : "bg-[#E8D5C4] hover:bg-[#D4C4B7] text-[#2D2A24] shadow-sm hover:shadow-md"
+                    ? "cursor-not-allowed"
+                    : "shadow-sm hover:shadow-md"
                 }`}
+                style={{
+                  backgroundColor:
+                    !isFormValid || isUploading
+                      ? "var(--color-border)"
+                      : "var(--color-primary)",
+                  color:
+                    !isFormValid || isUploading
+                      ? "var(--color-text-muted)"
+                      : "var(--color-text-primary)",
+                }}
+                onMouseEnter={(e) => {
+                  if (isFormValid && !isUploading) {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--color-primary-hover)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (isFormValid && !isUploading) {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--color-primary)";
+                  }
+                }}
               >
                 {isUploading ? (
                   <div className="flex items-center space-x-2">

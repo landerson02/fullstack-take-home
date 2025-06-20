@@ -51,22 +51,32 @@ export default function HomePage() {
   const categoryCount = Object.keys(groupedItems).length;
 
   return (
-    <div className="min-h-screen bg-[#FDFCFA]">
+    <div
+      className="min-h-screen"
+      style={{ backgroundColor: "var(--color-background)" }}
+    >
       <Header />
 
       <main className="max-w-7xl mx-auto px-6 py-8">
         {/* Portfolio Stats */}
         {totalItems > 0 && (
           <div className="mb-8" data-testid="portfolio-overview">
-            <div className="bg-gradient-to-r from-[#E8D5C4] to-[#D8B4A0] rounded-xl p-6 border border-[#E8E0D8]">
+            <div
+              className="rounded-xl p-6 border"
+              style={{
+                background: `linear-gradient(135deg, var(--color-accent-bg), var(--color-accent-bg-hover))`,
+                borderColor: "var(--color-border)",
+              }}
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                     <svg
-                      className="w-6 h-6 text-[#2D2A24]"
+                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      style={{ color: "var(--color-text-primary)" }}
                     >
                       <path
                         strokeLinecap="round"
@@ -78,20 +88,28 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-[#2D2A24]">
+                    <h2
+                      className="text-xl font-bold"
+                      style={{ color: "#000000" }}
+                    >
                       Portfolio Overview
                     </h2>
-                    <p className="text-sm text-[#6B5F5A]">
+                    <p className="text-sm" style={{ color: "#333333" }}>
                       {totalItems} total {totalItems === 1 ? "piece" : "pieces"}{" "}
                       across {categoryCount} categories
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-2xl font-bold text-[#2D2A24]">
+                  <div
+                    className="text-2xl font-bold"
+                    style={{ color: "#000000" }}
+                  >
                     {totalItems}
                   </div>
-                  <div className="text-sm text-[#6B5F5A]">Total Items</div>
+                  <div className="text-sm" style={{ color: "#333333" }}>
+                    Total Items
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,12 +121,18 @@ export default function HomePage() {
           {/* Empty State */}
           {totalItems === 0 && (
             <div className="text-center py-16">
-              <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-[#E8D5C4] to-[#D8B4A0] rounded-full flex items-center justify-center">
+              <div
+                className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center"
+                style={{
+                  background: `linear-gradient(135deg, var(--color-accent-bg), var(--color-accent-bg-hover))`,
+                }}
+              >
                 <svg
-                  className="w-12 h-12 text-[#2D2A24]"
+                  className="w-12 h-12"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  style={{ color: "#000000" }}
                 >
                   <path
                     strokeLinecap="round"
@@ -118,15 +142,24 @@ export default function HomePage() {
                   />
                 </svg>
               </div>
-              <h2 className="text-2xl font-semibold text-[#2D2A24] mb-2">
+              <h2
+                className="text-2xl font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
                 Your portfolio is empty
               </h2>
-              <p className="text-[#6B5F5A] max-w-md mx-auto mb-6">
+              <p
+                className="max-w-md mx-auto mb-6"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
                 Start building your portfolio by uploading your first image or
                 video. Organize your work into categories to create a
                 professional showcase.
               </p>
-              <div className="flex items-center justify-center space-x-4 text-sm text-[#9A8F8A]">
+              <div
+                className="flex items-center justify-center space-x-4 text-sm"
+                style={{ color: "var(--color-text-muted)" }}
+              >
                 <div className="flex items-center space-x-1">
                   <span>📷</span>
                   <span>Images</span>
