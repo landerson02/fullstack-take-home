@@ -1,75 +1,76 @@
-# Cashmere Frontend Take Home
+# Portfolio Manager
 
-Build a responsive, dynamic, single-page application using **Next.js** that allows users to create and manage a multimedia portfolio. Users should be able to:
+A full-stack portfolio viewer that lets users create and manage portfolios.
 
-- Upload images and videos.
-- Provide descriptions and metadata for each item.
-- Organize portfolio items into expandable/collapsible sections.
-- View a live preview of the portfolio.
-- Save their portfolio by interacting with a backend API.
+> Built for the Cashmere Full Stack Take-Home. 
 
-You are encouraged to make the UI polished and user-friendly, and demonstrate thoughtful state management and code organization. Bonus points for animations, elegant component abstractions, or enhancements to UX.
+This is a **single-page application (SPA)** built with **Next.js, Tailwind CSS, and FastAPI** that supports:
+- Uploading images and videos
+- Categorizing and previewing media
+- Saving and reloading portfolios via a real MongoDB database
+- Switching between multiple different portfolios
+- Supports multiple theme colors and light/dark mode
+- Polished and responsive UI with smooth animations
 
-**🔎 You can use any coding tools that you like but you must be able to explain every line of code and what it does.**
+## [Live Deployment](https://portfolio-manager-takehome.vercel.app)
 
----
+## Demo Video
+<p align="center">
+  <a href="https://youtu.be/lnqYRl4BoIw">
+    <img src="demo/vid-thumbnail.png" width="80%" alt="Watch the video"/>
+  </a>
+</p>
 
-## Technical Requirements
+## Images
 
-### Frontend (Next.js, React, Tailwind (optional))
+<p align="center">
+  <img src="demo/home-page.png" width="48%" />
+  <img src="demo/upload.png" width="48%" />
+</p>
 
-- **File Upload**:
-  - Allow image/video uploads via a form.
-  - Preview uploaded media before submitting.
 
-- **State Management**:
-  - Use React Context, Redux, or any state solution to manage portfolio state.
+## Tech Stack
+- **Frontend:** Next.js 15 (App Router), React, Tailwind CSS v4
+- **State Management:** React Context
+- **Animation:** Framer Motion
+- **Backend:** FastAPI + Motor (MongoDB)
+- **Storage:** Local file storage in dev, MongoDB Atlas in prod
+- **Testing:** Playwright (frontend only)
 
-- **Dynamic UI**:
-  - Show/hide metadata fields based on file type.
-  - Dynamically update portfolio preview as users make changes.
+## Testing
 
-- **Expandable/Collapsible Sections**:
-  - Group portfolio items into categories (e.g., "Photography", "Video Work").
-  - Each group should be collapsible.
+- `tests/` directory in the frontend
+- Includes: homepage loading, modal interaction, form filling, file upload
+- Run them with `npm test`
 
-- **Persistence**:
-  - Send portfolio data to a backend via API.
-  - Allow users to save and then reload previously saved portfolios.
+## Deployment
+- Frontend is deployed with Vercel
+- For the backend I used [Railway](https://railway.com/)
+- MongoDB Atlas for the database
 
-- **Creative UI**:
-  - Provide a live visual preview area for the portfolio.
-  - Style and layout is up to you — treat this like a real-world portfolio site.
+## Getting Started
 
----
-
-## Backend
-**Completing the API**
-Please fill in the blank for the `POST /upload` endpoint to make the endpoint functional
-
-Run the server using the following:
+#### 1. Clone the repo
 ```bash
-pip install fastapi uvicorn python-multipart pydantic
-uvicorn main:app --reload
+git clone https://github.com/landerson02/fullstack-take-home.git
 ```
 
----
+#### 2. Frontend
+```bash
+cd frontend/
+npm run dev
+```
 
-## Submission Instructions
+#### 3. Backend
+```bash
+pip install -r requirements.txt
+python main.py
+```
 
-1. Fork the GitHub starter repo or create your own.
-2. Include a `README.md` with:
-   - Setup instructions.
-   - Screenshots or a brief walkthrough of your UX.
-   - Any additional features you built.
-3. Provide a zip or GitHub link for both frontend and backend code.
+## Future Improvements
 
----
-
-## Evaluation Criteria
-
-- Code quality, modularity, and readability.
-- UX and UI polish.
-- Proper use of React patterns and state management.
-- Successful integration with FastAPI.
-- Creative enhancements beyond the core requirements.
+If I had an extra day I would've:
+- Implemented responsive design across all types of devices
+- Users + accounts so multiple users can share their portfolios
+- Allow users to create their own themes
+- Use Amazon S3 for image storage (currently just stores directly on the backend)
